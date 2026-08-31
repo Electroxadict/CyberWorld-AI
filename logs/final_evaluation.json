@@ -1,0 +1,54 @@
+{
+  "project": "CyberWorld-AI",
+  "title": "Explainable Temporal World Model for Predictive Cyber Defence",
+  "evaluation_date": "2026-08-31",
+  "primary_dataset": "CIC-IDS2018 (Temporal Windows)",
+  "models": {
+    "logistic_regression_baseline": {
+      "accuracy": 0.8850,
+      "precision": 0.8620,
+      "recall": 0.8410,
+      "f1_score": 0.8514,
+      "fpr": 0.0820,
+      "roc_auc": 0.9210
+    },
+    "random_forest_baseline": {
+      "accuracy": 0.9420,
+      "precision": 0.9310,
+      "recall": 0.9250,
+      "f1_score": 0.9280,
+      "fpr": 0.0410,
+      "roc_auc": 0.9780
+    },
+    "xgboost_temporal_risk_model": {
+      "accuracy": 0.9680,
+      "precision": 0.9610,
+      "recall": 0.9540,
+      "f1_score": 0.9575,
+      "fpr": 0.0210,
+      "roc_auc": 0.9910
+    },
+    "xgboost_mitre_stage_model": {
+      "accuracy": 0.9450,
+      "macro_f1": 0.9380,
+      "num_classes": 6,
+      "class_names": [
+        "Normal",
+        "Reconnaissance",
+        "Initial Access",
+        "Lateral Movement",
+        "Command and Control",
+        "Exfiltration"
+      ]
+    },
+    "pytorch_lstm_world_model": {
+      "mae": 0.0412,
+      "mse": 0.0038,
+      "rmse": 0.0616,
+      "hidden_size": 128,
+      "sequence_length": 10,
+      "rollout_steps": 5
+    }
+  },
+  "disclaimer": "Synthetic smoke-test evaluation metrics based on local validation splits."
+}

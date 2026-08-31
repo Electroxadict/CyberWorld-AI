@@ -1,0 +1,71 @@
+# CyberWorld-AI System Configuration
+
+paths:
+  raw_data_dir: "data/raw"
+  processed_data: "data/processed/network_traffic_processed.csv"
+  time_windows_data: "data/processed/time_windows.npy"
+  sequences_dir: "data/processed"
+  models_dir: "models"
+  logs_dir: "logs"
+
+temporal:
+  time_window_seconds: 5
+  sequence_length: 10
+  prediction_horizon: 5
+
+model:
+  hidden_size: 128
+  num_layers: 2
+  dropout: 0.2
+  lambda_state: 0.5
+  lambda_attack: 0.3
+  lambda_stage: 0.2
+
+training:
+  batch_size: 64
+  epochs: 30
+  learning_rate: 0.001
+  early_stopping_patience: 5
+  random_seed: 42
+  train_split: 0.60
+  val_split: 0.20
+  test_split: 0.20
+
+risk:
+  low: 25
+  moderate: 50
+  high: 75
+  critical: 90
+  w_current: 0.60
+  w_progression: 0.20
+  w_anomaly: 0.10
+  w_trend: 0.10
+
+mitre_stages:
+  0: "Normal"
+  1: "Reconnaissance"
+  2: "Initial Access"
+  3: "Lateral Movement"
+  4: "Command and Control"
+  5: "Exfiltration"
+
+xgboost:
+  n_estimators: 200
+  max_depth: 6
+  learning_rate: 0.05
+  subsample: 0.8
+  colsample_bytree: 0.8
+  reg_lambda: 1.0
+  random_seed: 42
+
+explainability:
+  top_features: 20
+  shap_sample_size: 200
+
+pcap:
+  enabled: true
+  max_packets: null
+  explanation_window: "latest"
+
+
+

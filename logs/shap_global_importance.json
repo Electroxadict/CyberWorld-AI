@@ -1,0 +1,1958 @@
+[
+  {
+    "feature": "fut_slope_Src Port_std",
+    "mean_abs_shap": 1.1064865589141846
+  },
+  {
+    "feature": "fut_pct_ACK Flag Cnt_std",
+    "mean_abs_shap": 0.5043056607246399
+  },
+  {
+    "feature": "fut_slope_Dst Port_max",
+    "mean_abs_shap": 0.4578579068183899
+  },
+  {
+    "feature": "fut_slope_Dst Port_min",
+    "mean_abs_shap": 0.42227211594581604
+  },
+  {
+    "feature": "fut_mean_RST Flag Cnt_mean",
+    "mean_abs_shap": 0.2327227145433426
+  },
+  {
+    "feature": "fut_mean_Tot Bwd Pkts_std",
+    "mean_abs_shap": 0.22566843032836914
+  },
+  {
+    "feature": "fut_diff_Port_Diversity",
+    "mean_abs_shap": 0.20528578758239746
+  },
+  {
+    "feature": "fut_mean_Unique_Dst_Ports",
+    "mean_abs_shap": 0.16352194547653198
+  },
+  {
+    "feature": "fut_diff_SYN Flag Cnt_min",
+    "mean_abs_shap": 0.140020489692688
+  },
+  {
+    "feature": "fut_mean_Unique_Src_Ports",
+    "mean_abs_shap": 0.13153134286403656
+  },
+  {
+    "feature": "curr_Fwd Pkt Len Mean_max",
+    "mean_abs_shap": 0.1296217143535614
+  },
+  {
+    "feature": "fut_slope_Flow Byts/s_std",
+    "mean_abs_shap": 0.11055149137973785
+  },
+  {
+    "feature": "fut_mean_Fwd Pkt Len Mean_std",
+    "mean_abs_shap": 0.10145735740661621
+  },
+  {
+    "feature": "fut_slope_Tot Bwd Pkts_std",
+    "mean_abs_shap": 0.0917869359254837
+  },
+  {
+    "feature": "fut_min_Flow Byts/s_max",
+    "mean_abs_shap": 0.09080404788255692
+  },
+  {
+    "feature": "fut_slope_RST Flag Cnt_std",
+    "mean_abs_shap": 0.08806343376636505
+  },
+  {
+    "feature": "fut_mean_Tot Fwd Pkts_std",
+    "mean_abs_shap": 0.08335967361927032
+  },
+  {
+    "feature": "fut_diff_SYN Flag Cnt_std",
+    "mean_abs_shap": 0.08235964179039001
+  },
+  {
+    "feature": "fut_pct_Flow Pkts/s_max",
+    "mean_abs_shap": 0.08138896524906158
+  },
+  {
+    "feature": "fut_slope_Src Port_mean",
+    "mean_abs_shap": 0.0753081887960434
+  },
+  {
+    "feature": "fut_diff_ACK Flag Cnt_std",
+    "mean_abs_shap": 0.07314538955688477
+  },
+  {
+    "feature": "fut_slope_Fwd Pkt Len Mean_max",
+    "mean_abs_shap": 0.07172271609306335
+  },
+  {
+    "feature": "fut_slope_Flow Pkts/s_mean",
+    "mean_abs_shap": 0.06834660470485687
+  },
+  {
+    "feature": "fut_min_Fwd Pkt Len Mean_std",
+    "mean_abs_shap": 0.06771904230117798
+  },
+  {
+    "feature": "fut_min_Tot Bwd Pkts_std",
+    "mean_abs_shap": 0.06404973566532135
+  },
+  {
+    "feature": "fut_max_Tot Bwd Pkts_mean",
+    "mean_abs_shap": 0.060193926095962524
+  },
+  {
+    "feature": "fut_slope_Src Port_max",
+    "mean_abs_shap": 0.05805226042866707
+  },
+  {
+    "feature": "fut_mean_Src Port_mean",
+    "mean_abs_shap": 0.05456507205963135
+  },
+  {
+    "feature": "wm_current_attack_prob",
+    "mean_abs_shap": 0.05426426976919174
+  },
+  {
+    "feature": "fut_mean_SYN Flag Cnt_mean",
+    "mean_abs_shap": 0.05133547633886337
+  },
+  {
+    "feature": "fut_diff_RST Flag Cnt_std",
+    "mean_abs_shap": 0.04702042415738106
+  },
+  {
+    "feature": "fut_pct_Unique_Dst_Ports",
+    "mean_abs_shap": 0.0469660684466362
+  },
+  {
+    "feature": "curr_ACK Flag Cnt_std",
+    "mean_abs_shap": 0.04675770550966263
+  },
+  {
+    "feature": "fut_min_RST Flag Cnt_mean",
+    "mean_abs_shap": 0.046351030468940735
+  },
+  {
+    "feature": "fut_max_RST Flag Cnt_mean",
+    "mean_abs_shap": 0.04293952137231827
+  },
+  {
+    "feature": "curr_Port_Scan_Score",
+    "mean_abs_shap": 0.0414825901389122
+  },
+  {
+    "feature": "fut_min_Protocol_std",
+    "mean_abs_shap": 0.04126643016934395
+  },
+  {
+    "feature": "curr_Dst Port_std",
+    "mean_abs_shap": 0.04050477594137192
+  },
+  {
+    "feature": "fut_min_Unique_Dst_Ports",
+    "mean_abs_shap": 0.04042829945683479
+  },
+  {
+    "feature": "fut_min_Unique_Src_Ports",
+    "mean_abs_shap": 0.04026316478848457
+  },
+  {
+    "feature": "fut_diff_Port_Scan_Score",
+    "mean_abs_shap": 0.03920770063996315
+  },
+  {
+    "feature": "fut_mean_SYN_ACK_Ratio",
+    "mean_abs_shap": 0.03747289627790451
+  },
+  {
+    "feature": "fut_mean_TotLen Bwd Pkts_max",
+    "mean_abs_shap": 0.03620494157075882
+  },
+  {
+    "feature": "fut_max_Tot Fwd Pkts_std",
+    "mean_abs_shap": 0.035962171852588654
+  },
+  {
+    "feature": "fut_pct_Tot Fwd Pkts_max",
+    "mean_abs_shap": 0.03476297855377197
+  },
+  {
+    "feature": "fut_slope_Bwd Pkt Len Mean_std",
+    "mean_abs_shap": 0.034482941031455994
+  },
+  {
+    "feature": "fut_pct_Port_Diversity",
+    "mean_abs_shap": 0.03419813886284828
+  },
+  {
+    "feature": "fut_max_TotLen Bwd Pkts_max",
+    "mean_abs_shap": 0.030397852882742882
+  },
+  {
+    "feature": "fut_slope_Flow Pkts/s_min",
+    "mean_abs_shap": 0.030218441039323807
+  },
+  {
+    "feature": "fut_max_SYN_ACK_Ratio",
+    "mean_abs_shap": 0.0294740442186594
+  },
+  {
+    "feature": "fut_pct_Tot Fwd Pkts_std",
+    "mean_abs_shap": 0.029420975595712662
+  },
+  {
+    "feature": "fut_max_Unique_Src_Ports",
+    "mean_abs_shap": 0.029000401496887207
+  },
+  {
+    "feature": "fut_slope_Protocol_max",
+    "mean_abs_shap": 0.028478939086198807
+  },
+  {
+    "feature": "fut_diff_Fwd Pkt Len Mean_max",
+    "mean_abs_shap": 0.027688032016158104
+  },
+  {
+    "feature": "fut_min_Bwd Pkt Len Mean_std",
+    "mean_abs_shap": 0.027501612901687622
+  },
+  {
+    "feature": "fut_max_Dst Port_mean",
+    "mean_abs_shap": 0.026803916320204735
+  },
+  {
+    "feature": "fut_max_Fwd Pkt Len Mean_std",
+    "mean_abs_shap": 0.026580482721328735
+  },
+  {
+    "feature": "fut_diff_Protocol_std",
+    "mean_abs_shap": 0.02628854289650917
+  },
+  {
+    "feature": "curr_Src Port_max",
+    "mean_abs_shap": 0.02546478807926178
+  },
+  {
+    "feature": "fut_slope_Flow Byts/s_mean",
+    "mean_abs_shap": 0.024654170498251915
+  },
+  {
+    "feature": "fut_min_Connection_Failure_Rate",
+    "mean_abs_shap": 0.02432858943939209
+  },
+  {
+    "feature": "fut_pct_SYN Flag Cnt_std",
+    "mean_abs_shap": 0.024151567369699478
+  },
+  {
+    "feature": "fut_slope_Unique_Dst_Ports",
+    "mean_abs_shap": 0.022660568356513977
+  },
+  {
+    "feature": "fut_mean_Traffic_Burst_Score",
+    "mean_abs_shap": 0.0220540389418602
+  },
+  {
+    "feature": "fut_diff_ACK Flag Cnt_min",
+    "mean_abs_shap": 0.02185777947306633
+  },
+  {
+    "feature": "fut_min_Fwd Pkt Len Mean_mean",
+    "mean_abs_shap": 0.021442629396915436
+  },
+  {
+    "feature": "curr_SYN Flag Cnt_mean",
+    "mean_abs_shap": 0.020895453169941902
+  },
+  {
+    "feature": "curr_Src Port_std",
+    "mean_abs_shap": 0.02044779434800148
+  },
+  {
+    "feature": "fut_max_Tot Bwd Pkts_std",
+    "mean_abs_shap": 0.020071018487215042
+  },
+  {
+    "feature": "fut_pct_SYN Flag Cnt_min",
+    "mean_abs_shap": 0.019937928766012192
+  },
+  {
+    "feature": "fut_slope_Protocol_std",
+    "mean_abs_shap": 0.01983564905822277
+  },
+  {
+    "feature": "fut_diff_Tot Fwd Pkts_min",
+    "mean_abs_shap": 0.019577987492084503
+  },
+  {
+    "feature": "fut_pct_Tot Fwd Pkts_mean",
+    "mean_abs_shap": 0.019290287047624588
+  },
+  {
+    "feature": "fut_max_Bwd Pkt Len Mean_mean",
+    "mean_abs_shap": 0.018961641937494278
+  },
+  {
+    "feature": "fut_max_Flow Byts/s_std",
+    "mean_abs_shap": 0.018772225826978683
+  },
+  {
+    "feature": "fut_min_ACK Flag Cnt_min",
+    "mean_abs_shap": 0.01857137680053711
+  },
+  {
+    "feature": "fut_mean_Flow Pkts/s_mean",
+    "mean_abs_shap": 0.01848755218088627
+  },
+  {
+    "feature": "fut_min_Flow Byts/s_mean",
+    "mean_abs_shap": 0.018390152603387833
+  },
+  {
+    "feature": "fut_pct_Flow Byts/s_min",
+    "mean_abs_shap": 0.017997536808252335
+  },
+  {
+    "feature": "fut_slope_Protocol_min",
+    "mean_abs_shap": 0.017247116193175316
+  },
+  {
+    "feature": "fut_diff_Dst Port_min",
+    "mean_abs_shap": 0.017065908759832382
+  },
+  {
+    "feature": "fut_slope_TotLen Fwd Pkts_mean",
+    "mean_abs_shap": 0.01700686104595661
+  },
+  {
+    "feature": "fut_min_TotLen Bwd Pkts_std",
+    "mean_abs_shap": 0.01685354858636856
+  },
+  {
+    "feature": "curr_Tot Fwd Pkts_mean",
+    "mean_abs_shap": 0.016634127125144005
+  },
+  {
+    "feature": "fut_slope_Tot Bwd Pkts_max",
+    "mean_abs_shap": 0.01611902564764023
+  },
+  {
+    "feature": "fut_min_Protocol_max",
+    "mean_abs_shap": 0.016089551150798798
+  },
+  {
+    "feature": "fut_slope_ACK Flag Cnt_std",
+    "mean_abs_shap": 0.01593686453998089
+  },
+  {
+    "feature": "fut_min_Flow Pkts/s_max",
+    "mean_abs_shap": 0.015692587941884995
+  },
+  {
+    "feature": "curr_Bwd Pkt Len Mean_min",
+    "mean_abs_shap": 0.015322539024055004
+  },
+  {
+    "feature": "fut_max_Fwd Pkt Len Mean_mean",
+    "mean_abs_shap": 0.015207772143185139
+  },
+  {
+    "feature": "curr_Bwd Pkt Len Mean_std",
+    "mean_abs_shap": 0.014850939624011517
+  },
+  {
+    "feature": "fut_pct_SYN Flag Cnt_mean",
+    "mean_abs_shap": 0.01437370479106903
+  },
+  {
+    "feature": "fut_mean_Flow Pkts/s_min",
+    "mean_abs_shap": 0.014346951618790627
+  },
+  {
+    "feature": "curr_Flow Pkts/s_min",
+    "mean_abs_shap": 0.014333580620586872
+  },
+  {
+    "feature": "fut_min_SYN Flag Cnt_std",
+    "mean_abs_shap": 0.013411590829491615
+  },
+  {
+    "feature": "fut_min_Src Port_max",
+    "mean_abs_shap": 0.013390976004302502
+  },
+  {
+    "feature": "fut_mean_SYN Flag Cnt_max",
+    "mean_abs_shap": 0.013300682418048382
+  },
+  {
+    "feature": "fut_diff_Src Port_std",
+    "mean_abs_shap": 0.013141578063368797
+  },
+  {
+    "feature": "fut_pct_Bwd Pkt Len Mean_max",
+    "mean_abs_shap": 0.013118158094584942
+  },
+  {
+    "feature": "fut_mean_Bwd Pkt Len Mean_max",
+    "mean_abs_shap": 0.01306570041924715
+  },
+  {
+    "feature": "fut_diff_Flow Pkts/s_min",
+    "mean_abs_shap": 0.012798634357750416
+  },
+  {
+    "feature": "wm_future_attack_mean",
+    "mean_abs_shap": 0.012455618008971214
+  },
+  {
+    "feature": "fut_pct_TotLen Fwd Pkts_mean",
+    "mean_abs_shap": 0.01243705302476883
+  },
+  {
+    "feature": "fut_slope_Flow Duration_mean",
+    "mean_abs_shap": 0.012263292446732521
+  },
+  {
+    "feature": "fut_slope_Unique_Src_Ports",
+    "mean_abs_shap": 0.012205483391880989
+  },
+  {
+    "feature": "fut_pct_Tot Bwd Pkts_std",
+    "mean_abs_shap": 0.011344490572810173
+  },
+  {
+    "feature": "fut_slope_TotLen Bwd Pkts_mean",
+    "mean_abs_shap": 0.011181814596056938
+  },
+  {
+    "feature": "fut_min_Src Port_mean",
+    "mean_abs_shap": 0.01102871261537075
+  },
+  {
+    "feature": "curr_Fwd Pkt Len Mean_std",
+    "mean_abs_shap": 0.010987203568220139
+  },
+  {
+    "feature": "fut_mean_Bwd Pkt Len Mean_std",
+    "mean_abs_shap": 0.010934827849268913
+  },
+  {
+    "feature": "fut_slope_Tot Fwd Pkts_mean",
+    "mean_abs_shap": 0.010741829872131348
+  },
+  {
+    "feature": "fut_diff_RST Flag Cnt_mean",
+    "mean_abs_shap": 0.010710651986300945
+  },
+  {
+    "feature": "fut_diff_RST_SYN_Ratio",
+    "mean_abs_shap": 0.010287395678460598
+  },
+  {
+    "feature": "fut_pct_Dst Port_min",
+    "mean_abs_shap": 0.010070470161736012
+  },
+  {
+    "feature": "curr_SYN_ACK_Ratio",
+    "mean_abs_shap": 0.009980276226997375
+  },
+  {
+    "feature": "fut_pct_Flow Duration_mean",
+    "mean_abs_shap": 0.009767716750502586
+  },
+  {
+    "feature": "fut_slope_Port_Diversity",
+    "mean_abs_shap": 0.009723445400595665
+  },
+  {
+    "feature": "curr_TotLen Fwd Pkts_min",
+    "mean_abs_shap": 0.009714786894619465
+  },
+  {
+    "feature": "fut_min_Dst Port_max",
+    "mean_abs_shap": 0.009094473905861378
+  },
+  {
+    "feature": "fut_min_RST Flag Cnt_max",
+    "mean_abs_shap": 0.009006362408399582
+  },
+  {
+    "feature": "fut_diff_TotLen Fwd Pkts_min",
+    "mean_abs_shap": 0.008894440717995167
+  },
+  {
+    "feature": "curr_Bwd Pkt Len Mean_max",
+    "mean_abs_shap": 0.008794103749096394
+  },
+  {
+    "feature": "fut_min_TotLen Fwd Pkts_std",
+    "mean_abs_shap": 0.008783378638327122
+  },
+  {
+    "feature": "fut_min_TotLen Bwd Pkts_max",
+    "mean_abs_shap": 0.008774230256676674
+  },
+  {
+    "feature": "curr_Flow Byts/s_max",
+    "mean_abs_shap": 0.008469351567327976
+  },
+  {
+    "feature": "fut_min_SYN_ACK_Ratio",
+    "mean_abs_shap": 0.00832790695130825
+  },
+  {
+    "feature": "fut_min_Protocol_mean",
+    "mean_abs_shap": 0.008021721616387367
+  },
+  {
+    "feature": "curr_TotLen Bwd Pkts_min",
+    "mean_abs_shap": 0.007927292957901955
+  },
+  {
+    "feature": "fut_mean_Tot Bwd Pkts_mean",
+    "mean_abs_shap": 0.007921447977423668
+  },
+  {
+    "feature": "curr_Tot Fwd Pkts_std",
+    "mean_abs_shap": 0.007897348143160343
+  },
+  {
+    "feature": "curr_Flow Byts/s_mean",
+    "mean_abs_shap": 0.007839693687856197
+  },
+  {
+    "feature": "fut_diff_Unique_Src_Ports",
+    "mean_abs_shap": 0.00766103807836771
+  },
+  {
+    "feature": "fut_diff_SYN Flag Cnt_mean",
+    "mean_abs_shap": 0.007630795240402222
+  },
+  {
+    "feature": "fut_slope_Bwd Pkt Len Mean_mean",
+    "mean_abs_shap": 0.007313139736652374
+  },
+  {
+    "feature": "wm_future_stage_max_prob",
+    "mean_abs_shap": 0.007191372569650412
+  },
+  {
+    "feature": "fut_pct_Fwd Pkt Len Mean_std",
+    "mean_abs_shap": 0.007123129907995462
+  },
+  {
+    "feature": "fut_min_Dst Port_mean",
+    "mean_abs_shap": 0.007045798934996128
+  },
+  {
+    "feature": "fut_diff_SYN_ACK_Ratio",
+    "mean_abs_shap": 0.00700683007016778
+  },
+  {
+    "feature": "curr_Src Port_mean",
+    "mean_abs_shap": 0.0069718630984425545
+  },
+  {
+    "feature": "fut_pct_ACK Flag Cnt_mean",
+    "mean_abs_shap": 0.006742381490767002
+  },
+  {
+    "feature": "curr_Flow Byts/s_min",
+    "mean_abs_shap": 0.006701325532048941
+  },
+  {
+    "feature": "curr_Flow Duration_min",
+    "mean_abs_shap": 0.006605891045182943
+  },
+  {
+    "feature": "fut_pct_Bwd Pkt Len Mean_std",
+    "mean_abs_shap": 0.00646484037861228
+  },
+  {
+    "feature": "fut_slope_SYN Flag Cnt_max",
+    "mean_abs_shap": 0.0063750529661774635
+  },
+  {
+    "feature": "fut_pct_SYN_ACK_Ratio",
+    "mean_abs_shap": 0.006241490598767996
+  },
+  {
+    "feature": "curr_TotLen Bwd Pkts_max",
+    "mean_abs_shap": 0.006133154034614563
+  },
+  {
+    "feature": "fut_pct_Traffic_Burst_Score",
+    "mean_abs_shap": 0.0060126883909106255
+  },
+  {
+    "feature": "fut_diff_Unique_Dst_Ports",
+    "mean_abs_shap": 0.005938067100942135
+  },
+  {
+    "feature": "fut_slope_ACK Flag Cnt_min",
+    "mean_abs_shap": 0.00593544403091073
+  },
+  {
+    "feature": "fut_mean_Tot Bwd Pkts_min",
+    "mean_abs_shap": 0.005849530920386314
+  },
+  {
+    "feature": "fut_diff_Src Port_mean",
+    "mean_abs_shap": 0.00523117370903492
+  },
+  {
+    "feature": "fut_pct_Port_Scan_Score",
+    "mean_abs_shap": 0.005089594516903162
+  },
+  {
+    "feature": "fut_min_Tot Bwd Pkts_max",
+    "mean_abs_shap": 0.004811705090105534
+  },
+  {
+    "feature": "fut_max_Tot Fwd Pkts_max",
+    "mean_abs_shap": 0.004736090544611216
+  },
+  {
+    "feature": "curr_Flow Duration_mean",
+    "mean_abs_shap": 0.004726892337203026
+  },
+  {
+    "feature": "fut_slope_SYN Flag Cnt_min",
+    "mean_abs_shap": 0.004443454556167126
+  },
+  {
+    "feature": "fut_mean_Bwd Pkt Len Mean_min",
+    "mean_abs_shap": 0.0043681045062839985
+  },
+  {
+    "feature": "fut_pct_TotLen Fwd Pkts_max",
+    "mean_abs_shap": 0.004326803609728813
+  },
+  {
+    "feature": "fut_max_Flow_Count",
+    "mean_abs_shap": 0.004307636059820652
+  },
+  {
+    "feature": "fut_slope_Dst Port_std",
+    "mean_abs_shap": 0.00425061397254467
+  },
+  {
+    "feature": "fut_max_TotLen Bwd Pkts_mean",
+    "mean_abs_shap": 0.004237146582454443
+  },
+  {
+    "feature": "fut_max_Bwd Pkt Len Mean_std",
+    "mean_abs_shap": 0.0041144657880067825
+  },
+  {
+    "feature": "fut_mean_Flow Duration_max",
+    "mean_abs_shap": 0.004060941748321056
+  },
+  {
+    "feature": "fut_pct_Tot Bwd Pkts_max",
+    "mean_abs_shap": 0.004032196942716837
+  },
+  {
+    "feature": "curr_TotLen Bwd Pkts_std",
+    "mean_abs_shap": 0.0039042322896420956
+  },
+  {
+    "feature": "fut_slope_Flow Byts/s_min",
+    "mean_abs_shap": 0.0038588237948715687
+  },
+  {
+    "feature": "fut_slope_Flow_Count",
+    "mean_abs_shap": 0.003757194383069873
+  },
+  {
+    "feature": "fut_slope_TotLen Fwd Pkts_std",
+    "mean_abs_shap": 0.003690802725031972
+  },
+  {
+    "feature": "fut_mean_TotLen Bwd Pkts_mean",
+    "mean_abs_shap": 0.003447993192821741
+  },
+  {
+    "feature": "fut_pct_Flow Pkts/s_std",
+    "mean_abs_shap": 0.0033742114901542664
+  },
+  {
+    "feature": "fut_pct_Flow Byts/s_mean",
+    "mean_abs_shap": 0.0033210229594260454
+  },
+  {
+    "feature": "fut_pct_TotLen Bwd Pkts_mean",
+    "mean_abs_shap": 0.0032761606853455305
+  },
+  {
+    "feature": "fut_pct_Protocol_mean",
+    "mean_abs_shap": 0.003112973179668188
+  },
+  {
+    "feature": "fut_max_ACK Flag Cnt_mean",
+    "mean_abs_shap": 0.0029648556374013424
+  },
+  {
+    "feature": "fut_pct_Protocol_std",
+    "mean_abs_shap": 0.0028115666937083006
+  },
+  {
+    "feature": "curr_Tot Fwd Pkts_min",
+    "mean_abs_shap": 0.0027925220783799887
+  },
+  {
+    "feature": "fut_slope_Tot Fwd Pkts_std",
+    "mean_abs_shap": 0.002678012941032648
+  },
+  {
+    "feature": "fut_pct_TotLen Fwd Pkts_std",
+    "mean_abs_shap": 0.002658698707818985
+  },
+  {
+    "feature": "fut_diff_Fwd Pkt Len Mean_mean",
+    "mean_abs_shap": 0.0026441719383001328
+  },
+  {
+    "feature": "fut_diff_Flow Duration_mean",
+    "mean_abs_shap": 0.0025393564719706774
+  },
+  {
+    "feature": "fut_pct_Flow Byts/s_std",
+    "mean_abs_shap": 0.0024116248823702335
+  },
+  {
+    "feature": "fut_pct_Src Port_max",
+    "mean_abs_shap": 0.0021435474045574665
+  },
+  {
+    "feature": "fut_diff_SYN Flag Cnt_max",
+    "mean_abs_shap": 0.0020782495848834515
+  },
+  {
+    "feature": "fut_diff_Flow Byts/s_min",
+    "mean_abs_shap": 0.0019169248407706618
+  },
+  {
+    "feature": "fut_slope_ACK Flag Cnt_max",
+    "mean_abs_shap": 0.0017811811994761229
+  },
+  {
+    "feature": "fut_mean_Flow Duration_std",
+    "mean_abs_shap": 0.0013470862759277225
+  },
+  {
+    "feature": "curr_Tot Bwd Pkts_std",
+    "mean_abs_shap": 0.0010612837504595518
+  },
+  {
+    "feature": "fut_min_Flow Duration_std",
+    "mean_abs_shap": 0.000926810665987432
+  },
+  {
+    "feature": "fut_diff_Tot Bwd Pkts_mean",
+    "mean_abs_shap": 0.0008068956667557359
+  },
+  {
+    "feature": "curr_Tot Fwd Pkts_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_Tot Fwd Pkts_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_Protocol_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_Protocol_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_Protocol_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_Dst Port_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_Dst Port_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_Flow Duration_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_Tot Fwd Pkts_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_Fwd Pkt Len Mean_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_Dst Port_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_Fwd Pkt Len Mean_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_TotLen Bwd Pkts_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_Flow Duration_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_Flow Duration_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_Bwd Pkt Len Mean_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_Flow Duration_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_Flow Byts/s_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_Src Port_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_Flow Pkts/s_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_Protocol_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_Protocol_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_Flow Duration_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_slope_Flow Duration_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_Flow Duration_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_Flow Duration_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_Tot Fwd Pkts_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_Tot Bwd Pkts_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_Tot Fwd Pkts_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_Tot Fwd Pkts_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_slope_Flow Duration_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_Flow Duration_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_Tot Bwd Pkts_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_Flow Duration_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_Tot Fwd Pkts_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_Tot Bwd Pkts_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_TotLen Fwd Pkts_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_Flow Duration_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_Flow Pkts/s_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_Flow Duration_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_slope_Flow Duration_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_Flow Duration_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_Flow Duration_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_Flow Duration_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_Flow Duration_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_Flow Duration_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_TotLen Fwd Pkts_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_TotLen Fwd Pkts_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_Protocol_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_Flow Duration_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_Src Port_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_Protocol_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_Dst Port_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_Dst Port_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_Dst Port_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_Flow_Count",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_Flow_Count",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_Dst Port_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_Dst Port_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_Src Port_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_Src Port_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_Src Port_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_Src Port_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_Src Port_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_Dst Port_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_Dst Port_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_Dst Port_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_Src Port_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_Dst Port_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_Dst Port_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_slope_Dst Port_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_Dst Port_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_Dst Port_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_Tot Fwd Pkts_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_Src Port_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_Dst Port_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_Src Port_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_slope_Src Port_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_Src Port_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_Src Port_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_Src Port_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_Src Port_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_Flow_Count",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_Dst Port_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_Protocol_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_Dst Port_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_Protocol_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_Flow Pkts/s_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_Protocol_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_Src Port_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_SYN Flag Cnt_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_SYN Flag Cnt_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_Protocol_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_ACK Flag Cnt_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_Protocol_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_Protocol_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_ACK Flag Cnt_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_ACK Flag Cnt_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_RST Flag Cnt_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_Protocol_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_Protocol_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_RST Flag Cnt_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_slope_Protocol_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_RST Flag Cnt_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_RST Flag Cnt_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_Unique_Src_Ports",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_Protocol_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_Unique_Dst_Ports",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_Protocol_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_Protocol_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_RST_SYN_Ratio",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_Port_Diversity",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_Connection_Failure_Rate",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_Traffic_Burst_Score",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_Flow_Count",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_SYN Flag Cnt_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "wm_future_stage_dominant",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_Tot Fwd Pkts_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_SYN Flag Cnt_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_slope_SYN Flag Cnt_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_SYN Flag Cnt_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_SYN Flag Cnt_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_SYN Flag Cnt_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_SYN Flag Cnt_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_SYN Flag Cnt_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_SYN Flag Cnt_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_ACK Flag Cnt_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_ACK Flag Cnt_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_ACK Flag Cnt_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_slope_ACK Flag Cnt_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_ACK Flag Cnt_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_ACK Flag Cnt_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_ACK Flag Cnt_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_ACK Flag Cnt_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_ACK Flag Cnt_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_ACK Flag Cnt_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_ACK Flag Cnt_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_ACK Flag Cnt_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_SYN Flag Cnt_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_slope_SYN Flag Cnt_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_ACK Flag Cnt_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_SYN Flag Cnt_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_Flow Byts/s_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_Flow Byts/s_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_Flow Pkts/s_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_Flow Pkts/s_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_Flow Pkts/s_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_Flow Pkts/s_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_Flow Pkts/s_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_Flow Pkts/s_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_Flow Pkts/s_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_Flow Pkts/s_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_slope_Flow Pkts/s_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_Flow Pkts/s_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_Flow Pkts/s_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_Flow Pkts/s_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_slope_Flow Pkts/s_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_Flow Pkts/s_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_Flow Pkts/s_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_Flow Pkts/s_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_SYN Flag Cnt_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_ACK Flag Cnt_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_ACK Flag Cnt_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_slope_Flow Byts/s_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_RST_SYN_Ratio",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_slope_RST_SYN_Ratio",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_Port_Diversity",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_Port_Diversity",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_Port_Diversity",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_Connection_Failure_Rate",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_Connection_Failure_Rate",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_Connection_Failure_Rate",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_Connection_Failure_Rate",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_slope_Connection_Failure_Rate",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_Traffic_Burst_Score",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_Traffic_Burst_Score",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_Traffic_Burst_Score",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_slope_Traffic_Burst_Score",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_Port_Scan_Score",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_Port_Scan_Score",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_Port_Scan_Score",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_slope_Port_Scan_Score",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "wm_future_attack_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "wm_future_attack_slope",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_RST_SYN_Ratio",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_RST_SYN_Ratio",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_RST Flag Cnt_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_RST_SYN_Ratio",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_slope_RST Flag Cnt_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_RST Flag Cnt_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_RST Flag Cnt_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_RST Flag Cnt_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_RST Flag Cnt_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_RST Flag Cnt_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_RST Flag Cnt_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_RST Flag Cnt_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_RST Flag Cnt_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_slope_RST Flag Cnt_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_RST Flag Cnt_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_RST Flag Cnt_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_RST Flag Cnt_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_RST Flag Cnt_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_RST Flag Cnt_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_slope_RST Flag Cnt_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_Unique_Src_Ports",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_Unique_Dst_Ports",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_slope_SYN_ACK_Ratio",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_Flow Byts/s_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_Flow Byts/s_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_Tot Fwd Pkts_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_TotLen Fwd Pkts_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_TotLen Fwd Pkts_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_TotLen Fwd Pkts_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_TotLen Fwd Pkts_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_TotLen Fwd Pkts_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_TotLen Fwd Pkts_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_TotLen Fwd Pkts_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_slope_TotLen Fwd Pkts_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_TotLen Fwd Pkts_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_TotLen Fwd Pkts_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_TotLen Fwd Pkts_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_TotLen Fwd Pkts_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_slope_TotLen Fwd Pkts_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_TotLen Bwd Pkts_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_TotLen Bwd Pkts_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_TotLen Bwd Pkts_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_TotLen Bwd Pkts_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_TotLen Bwd Pkts_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_TotLen Bwd Pkts_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_slope_TotLen Bwd Pkts_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_TotLen Fwd Pkts_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_TotLen Fwd Pkts_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_TotLen Bwd Pkts_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_TotLen Fwd Pkts_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_slope_Tot Fwd Pkts_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_Tot Fwd Pkts_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_Tot Fwd Pkts_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_Tot Fwd Pkts_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_Tot Fwd Pkts_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_slope_Tot Fwd Pkts_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_Tot Bwd Pkts_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_Tot Bwd Pkts_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_slope_Tot Bwd Pkts_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_Tot Bwd Pkts_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_Tot Bwd Pkts_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_Tot Bwd Pkts_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_Tot Bwd Pkts_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_Tot Bwd Pkts_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_Tot Bwd Pkts_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_Tot Bwd Pkts_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_Tot Bwd Pkts_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_slope_Tot Bwd Pkts_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_TotLen Fwd Pkts_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_TotLen Bwd Pkts_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_slope_TotLen Bwd Pkts_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_Flow Byts/s_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_Bwd Pkt Len Mean_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_Bwd Pkt Len Mean_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_Bwd Pkt Len Mean_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_Bwd Pkt Len Mean_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_Bwd Pkt Len Mean_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_Bwd Pkt Len Mean_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_slope_Bwd Pkt Len Mean_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_Bwd Pkt Len Mean_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_Bwd Pkt Len Mean_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_Bwd Pkt Len Mean_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_Bwd Pkt Len Mean_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_slope_Bwd Pkt Len Mean_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_Flow Byts/s_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_Flow Byts/s_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_Flow Byts/s_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_Flow Byts/s_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_Flow Byts/s_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_Flow Byts/s_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_Flow Byts/s_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_Flow Byts/s_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_Bwd Pkt Len Mean_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_Bwd Pkt Len Mean_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_TotLen Bwd Pkts_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_slope_Fwd Pkt Len Mean_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_TotLen Bwd Pkts_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_TotLen Bwd Pkts_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_TotLen Bwd Pkts_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_TotLen Bwd Pkts_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_slope_TotLen Bwd Pkts_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_Fwd Pkt Len Mean_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_Fwd Pkt Len Mean_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_slope_Fwd Pkt Len Mean_mean",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_Fwd Pkt Len Mean_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_slope_Fwd Pkt Len Mean_std",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_Fwd Pkt Len Mean_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_Fwd Pkt Len Mean_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_Fwd Pkt Len Mean_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_Fwd Pkt Len Mean_max",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_mean_Fwd Pkt Len Mean_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_max_Fwd Pkt Len Mean_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_min_Fwd Pkt Len Mean_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_diff_Fwd Pkt Len Mean_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "fut_pct_Fwd Pkt Len Mean_min",
+    "mean_abs_shap": 0.0
+  },
+  {
+    "feature": "curr_Flow_Count",
+    "mean_abs_shap": 0.0
+  }
+]

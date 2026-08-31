@@ -1,0 +1,12 @@
+# CyberWorld-AI Requirements
+torch>=2.0.0
+xgboost>=1.7.0
+scikit-learn>=1.2.0
+shap>=0.42.0
+streamlit>=1.25.0
+scapy>=2.5.0
+pandas>=2.0.0
+numpy>=1.24.0
+pyyaml>=6.0
+plotly>=5.15.0
+pytest>=7.3.0
