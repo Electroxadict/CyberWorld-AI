@@ -24,7 +24,8 @@ from dashboard.components import (
     render_kpi_cards,
     render_main_status_panel,
     render_pipeline_flow,
-    render_model_info_expander
+    render_model_info_expander,
+    render_inference_debug_info
 )
 from dashboard.charts import (
     create_risk_gauge_chart,
@@ -35,7 +36,7 @@ from dashboard.charts import (
     create_attention_chart
 )
 from attack_mapping.mitre_mapper import MitreStageMapper
-from scripts.generate_sample_pcap import generate_sample_pcap
+from scripts.generate_sih_demo_pcaps import generate_all_sih_pcaps
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -62,40 +63,56 @@ def main():
         st.error(f"Failed to initialize CyberWorld-AI Predictive Defence Pipeline: {e}")
         st.stop()
         
-    # --- Sidebar Controls ---
-    st.sidebar.title("🛡️ Defence Controls")
-    
+    # Ensure SIH Demo PCAPs exist
     data_dir = PROJECT_ROOT / "data" / "raw"
     data_dir.mkdir(parents=True, exist_ok=True)
     
-    sample_pcap_path = data_dir / "sample_test.pcap"
-    if not sample_pcap_path.exists():
+    pcap_1 = data_dir / "pcap_1_normal.pcap"
+    if not pcap_1.exists():
         try:
-            generate_sample_pcap(sample_pcap_path)
+            generate_all_sih_pcaps(data_dir)
         except Exception:
             pass
             
-    pcap_source = st.sidebar.radio(
-        "Select PCAP Input Source:",
-        ["Select Sample / Existing PCAP", "Upload PCAP File (.pcap / .pcapng)"]
+    # --- Sidebar Controls ---
+    st.sidebar.title("🛡️ SIH Demo Controls")
+    
+    scenario_choice = st.sidebar.radio(
+        "Select Demo Scenario / Input PCAP:",
+        [
+            "PCAP 1 — Normal Traffic",
+            "PCAP 2 — Port Scanning / Reconnaissance",
+            "PCAP 3 — Brute Force / Initial Access",
+            "PCAP 4 — Lateral Movement",
+            "PCAP 5 — Data Exfiltration",
+            "Select Existing PCAP File",
+            "Upload Custom PCAP File (.pcap / .pcapng)"
+        ]
     )
     
     target_pcap_path = None
     is_synthetic_sample = False
     
-    if pcap_source == "Select Sample / Existing PCAP":
-        existing_files = list(data_dir.glob("*.pcap")) + list(data_dir.glob("*.pcapng"))
+    if scenario_choice == "PCAP 1 — Normal Traffic":
+        target_pcap_path = data_dir / "pcap_1_normal.pcap"
+    elif scenario_choice == "PCAP 2 — Port Scanning / Reconnaissance":
+        target_pcap_path = data_dir / "pcap_2_reconnaissance.pcap"
+    elif scenario_choice == "PCAP 3 — Brute Force / Initial Access":
+        target_pcap_path = data_dir / "pcap_3_initial_access.pcap"
+    elif scenario_choice == "PCAP 4 — Lateral Movement":
+        target_pcap_path = data_dir / "pcap_4_lateral_movement.pcap"
+    elif scenario_choice == "PCAP 5 — Data Exfiltration":
+        target_pcap_path = data_dir / "pcap_5_exfiltration.pcap"
+    elif scenario_choice == "Select Existing PCAP File":
+        existing_files = sorted(list(data_dir.glob("*.pcap")) + list(data_dir.glob("*.pcapng")))
         file_names = [f.name for f in existing_files]
-        
         if file_names:
             selected_name = st.sidebar.selectbox("Choose PCAP File:", file_names)
             target_pcap_path = data_dir / selected_name
             if selected_name == "sample_test.pcap":
                 is_synthetic_sample = True
-                st.sidebar.warning("⚠️ Selected file is a SYNTHETIC TEST FIXTURE generated via Scapy.")
         else:
             st.sidebar.error("No existing .pcap files found in data/raw/.")
-            
     else:
         uploaded_file = st.sidebar.file_uploader("Upload .pcap or .pcapng file", type=["pcap", "pcapng"])
         if uploaded_file is not None:
@@ -109,47 +126,48 @@ def main():
     st.sidebar.markdown("**Analysis Configuration:**")
     st.sidebar.text("Prediction Horizon: 5 steps (+25s)")
     st.sidebar.text("Time Window: 5 seconds")
+    st.sidebar.text("Sequence Window: 10 states (50s)")
     
-    analyze_btn = st.sidebar.button("🚀 Analyze PCAP Traffic", use_container_width=True)
+    analyze_btn = st.sidebar.button("🚀 Re-Run Inference", use_container_width=True)
     
-    # Store prediction result in session state
-    if "prediction_result" not in st.session_state:
-        st.session_state["prediction_result"] = None
-        
-    if analyze_btn and target_pcap_path:
-        if not target_pcap_path.exists():
-            st.error(f"Target PCAP file does not exist: {target_pcap_path}")
-        else:
-            with st.spinner(f"Parsing PCAP traffic & executing World Model simulation for {target_pcap_path.name}..."):
-                try:
-                    res = pipeline.predict(target_pcap_path)
-                    st.session_state["prediction_result"] = res
-                    st.session_state["pcap_name"] = target_pcap_path.name
-                    st.session_state["is_synthetic"] = is_synthetic_sample
-                    st.success("Analysis Complete!")
-                except Exception as err:
-                    st.error(f"PCAP Predictive Pipeline Analysis Failed: {err}")
-                    with st.expander("Technical Details"):
-                        st.exception(err)
-                        
-    # If no analysis run yet, auto-run on default sample PCAP if available
-    if st.session_state["prediction_result"] is None and sample_pcap_path.exists():
-        try:
-            res = pipeline.predict(sample_pcap_path)
-            st.session_state["prediction_result"] = res
-            st.session_state["pcap_name"] = sample_pcap_path.name
-            st.session_state["is_synthetic"] = True
-        except Exception:
-            pass
-            
+    # State tracking: Check if selected PCAP path changed
+    current_path_str = str(target_pcap_path) if target_pcap_path else None
+    last_path_str = st.session_state.get("last_analyzed_pcap")
+    
+    should_run_inference = (
+        target_pcap_path is not None
+        and target_pcap_path.exists()
+        and (current_path_str != last_path_str or analyze_btn or st.session_state.get("prediction_result") is None)
+    )
+    
+    if should_run_inference:
+        with st.spinner(f"Running ML Pipeline for {target_pcap_path.name}..."):
+            try:
+                res = pipeline.predict(target_pcap_path)
+                st.session_state["prediction_result"] = res
+                st.session_state["last_analyzed_pcap"] = current_path_str
+                st.session_state["target_pcap_path"] = target_pcap_path
+                st.session_state["is_synthetic"] = is_synthetic_sample
+                
+                # Save output log (DO NOT READ FROM IT FOR PREDICTION)
+                logs_dir = PROJECT_ROOT / "logs"
+                logs_dir.mkdir(parents=True, exist_ok=True)
+                with open(logs_dir / "latest_analysis.json", "w", encoding="utf-8") as f:
+                    json.dump(res, f, indent=2)
+            except Exception as err:
+                st.error(f"PCAP Predictive Pipeline Analysis Failed: {err}")
+                with st.expander("Technical Details"):
+                    st.exception(err)
+                    
     res = st.session_state.get("prediction_result")
+    active_path = st.session_state.get("target_pcap_path", target_pcap_path)
     
     if res is None:
-        st.info("👈 Please select or upload a .pcap file in the sidebar and click **Analyze PCAP Traffic**.")
+        st.info("👈 Please select or upload a .pcap file in the sidebar.")
         return
         
     if st.session_state.get("is_synthetic", False):
-        st.warning("⚠️ **NOTICE**: Currently analyzing `sample_test.pcap` — SYNTHETIC TEST FIXTURE generated via Scapy for local testing. Results reflect synthetic flow attributes.")
+        st.warning("⚠️ **NOTICE**: Currently analyzing `sample_test.pcap` — SYNTHETIC TEST FIXTURE generated via Scapy. Results reflect synthetic flow attributes.")
         
     # Render Top KPI Cards & Security Status Panel
     render_main_status_panel(res)
@@ -162,7 +180,7 @@ def main():
         "🔮 2. Future Prediction & Trajectory",
         "💡 3. Explainability (SHAP & Attention)",
         "🌐 4. Network Telemetry & Flows",
-        "⚙️ 5. System & Model Info"
+        "⚙️ 5. Debug & System Info"
     ])
     
     # --- TAB 1: OVERVIEW ---
@@ -262,17 +280,20 @@ def main():
     with tab4:
         st.subheader("Extracted Network Telemetry & Flow Records")
         
-        st.markdown(f"### 🔍 Extracted Flows Table (`{res['flow_count']}` total flows)")
-        # Show flow table if available via pipeline
+        st.markdown(f"### 🔍 Extracted Flows Summary (`{res['flow_count']}` total flows)")
         st.info(f"Analyzed {res['flow_count']} flows aggregated into {res['window_count']} 5-second temporal state windows.")
         
-        st.markdown("### 📊 69-Feature Current State Vector")
+        st.markdown("### 📊 Top Feature Drivers & Current Values")
         top_shap_df = pd.DataFrame(res["top_shap_features"])
         st.dataframe(top_shap_df, use_container_width=True)
 
-    # --- TAB 5: SYSTEM INFO & EXPORT ---
+    # --- TAB 5: DEBUG & SYSTEM INFO ---
     with tab5:
-        st.subheader("System Architecture & Execution Status")
+        st.subheader("Inference Debug Lineage & System Architecture")
+        
+        # PART 5: Inference Debug Information Expander
+        render_inference_debug_info(res, active_path)
+        
         render_pipeline_flow()
         render_model_info_expander(pipeline.config)
         

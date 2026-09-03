@@ -77,5 +77,5 @@
     "Traffic_Burst_Score",
     "Port_Scan_Score"
   ],
-  "best_val_loss": 0.7952886819839478
+  "best_val_loss": 0.11055336892604828
 }

@@ -4,7 +4,7 @@
   "n_estimators": 200,
   "max_depth": 6,
   "learning_rate": 0.05,
-  "scale_pos_weight": 1.590908729338925,
+  "scale_pos_weight": 0.19999997894737062,
   "feature_columns": [
     "curr_Flow_Count",
     "curr_Src Port_mean",

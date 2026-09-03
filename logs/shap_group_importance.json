@@ -1,42 +1,42 @@
 {
   "CURRENT": {
-    "total_shap_importance": 5291006243.219709,
-    "percentage_share": 49.99982474171242,
+    "total_shap_importance": 163.27582071721554,
+    "percentage_share": 31.82349707197803,
     "feature_count": 69
   },
   "FUTURE MEAN": {
-    "total_shap_importance": 3.642645225219894,
-    "percentage_share": 3.4422870524983286e-08,
+    "total_shap_importance": 27.182547805830836,
+    "percentage_share": 5.298051644805186,
     "feature_count": 69
   },
   "FUTURE MAX": {
-    "total_shap_importance": 3.6784909619018435,
-    "percentage_share": 3.4761611488317395e-08,
+    "total_shap_importance": 27.547870635986328,
+    "percentage_share": 5.36925539049583,
     "feature_count": 69
   },
   "FUTURE MIN": {
-    "total_shap_importance": 3.6020603319630027,
-    "percentage_share": 3.403934469705479e-08,
+    "total_shap_importance": 26.62556269019842,
+    "percentage_share": 5.189491699317834,
     "feature_count": 69
   },
   "FUTURE DIFFERENCE": {
-    "total_shap_importance": 5291006244.24789,
-    "percentage_share": 49.999824751428704,
+    "total_shap_importance": 175.58688107132912,
+    "percentage_share": 34.223001122309036,
     "feature_count": 69
   },
   "FUTURE PERCENTAGE CHANGE": {
-    "total_shap_importance": 37078.279002428055,
-    "percentage_share": 0.0003503884453399491,
+    "total_shap_importance": 87.74248108267784,
+    "percentage_share": 17.10156823929701,
     "feature_count": 69
   },
   "FUTURE SLOPE": {
-    "total_shap_importance": 0.08815647661685944,
-    "percentage_share": 8.330756340229869e-10,
+    "total_shap_importance": 0.3988447431474924,
+    "percentage_share": 0.07773737997441138,
     "feature_count": 69
   },
   "WORLD MODEL THREAT FEATURES": {
-    "total_shap_importance": 1.5192268788814545,
-    "percentage_share": 1.4356641099094087e-08,
+    "total_shap_importance": 4.706862401962098,
+    "percentage_share": 0.9173974518031671,
     "feature_count": 6
   }
 }

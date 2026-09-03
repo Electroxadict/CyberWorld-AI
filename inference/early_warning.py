@@ -97,19 +97,25 @@ class EarlyWarningEngine:
             
         return f"ELEVATED RISK WARNING: Moderate threat activity detected (Risk Score: {current_risk:.1f}/100)."
 
-    def analyze_sequence(self, x_raw) -> dict:
+    def analyze_sequence(self, x_raw, xgb_attack_prob=None) -> dict:
         """
         Runs full predictive pipeline: World Model -> 5-Step Rollout -> Risk Engine -> Early Warning.
         
         Args:
             x_raw (numpy.ndarray / torch.Tensor): Sequence window (batch_size=1 or tensor, seq_len=10, num_features).
+            xgb_attack_prob (float, optional): XGBoost risk model attack probability.
             
         Returns:
             dict: Structured early warning analysis result.
         """
         # 1. Single Step Prediction
-        pred_res = self.predictor.predict(x_raw)
-        curr_att_prob = float(pred_res["attack_probability"][0, 0])
+        if xgb_attack_prob is not None:
+            curr_att_prob = float(np.clip(xgb_attack_prob, 0.0, 1.0))
+            pred_res = self.predictor.predict(x_raw)
+        else:
+            pred_res = self.predictor.predict(x_raw)
+            curr_att_prob = float(pred_res["attack_probability"][0, 0])
+            
         curr_stage_idx = int(pred_res["stage_prediction"][0])
         curr_stage_name = self.decode_stage_name(curr_stage_idx)
         

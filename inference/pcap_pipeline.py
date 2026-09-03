@@ -95,7 +95,7 @@ class PCAPPredictivePipeline:
         Aggregates raw PCAP flow records into 5-second temporal state windows.
         Matches exact feature semantics and ordering of training pipeline.
         """
-        df_clean = clean_dataframe(df_flows)
+        df_clean = clean_dataframe(df_flows, drop_zero_variance=False)
         
         min_time = df_clean["Timestamp"].min()
         df_clean["Window_ID"] = ((df_clean["Timestamp"] - min_time).dt.total_seconds() // self.window_sec).astype(int)
@@ -174,6 +174,8 @@ class PCAPPredictivePipeline:
             
         # Transform using existing fitted scaler (DO NOT FIT NEW SCALER!)
         scaled_matrix = self.scaler.transform(X_df.values)
+        # Clip extreme Z-scores to prevent single feature outlier explosion
+        scaled_matrix = np.clip(scaled_matrix, -10.0, 10.0)
         return scaled_matrix
 
     def create_sequence(self, scaled_matrix: np.ndarray) -> np.ndarray:
@@ -197,6 +199,10 @@ class PCAPPredictivePipeline:
         """
         Executes complete end-to-end predictive pipeline for a PCAP file.
         """
+        import time
+        from datetime import datetime
+        start_t = time.time()
+        
         pcap_p = Path(pcap_path)
         logger.info(f"--- Starting CyberWorld-AI Predictive Defence for PCAP: {pcap_p.name} ---")
         
@@ -212,11 +218,11 @@ class PCAPPredictivePipeline:
         # 4. Temporal Sequence Construction
         x_seq = self.create_sequence(scaled_matrix)
         
-        # 5. Early Warning & Multi-step Forecast Analysis
-        ew_analysis = self.early_warning.analyze_sequence(x_seq)
-        
-        # 6. XGBoost Inference & MITRE Stage Prediction
+        # 5. XGBoost Inference & MITRE Stage Prediction
         xgb_res = self.xgb_predictor.predict(x_seq)
+        
+        # 6. Early Warning & Multi-step Forecast Analysis (Using XGBoost Risk Probabilities)
+        ew_analysis = self.early_warning.analyze_sequence(x_seq, xgb_attack_prob=xgb_res["attack_probability"])
         
         # 7. SHAP Feature Contribution Analysis
         xgb_feat_2d = self.xgb_predictor.build_features(x_seq)
@@ -232,6 +238,8 @@ class PCAPPredictivePipeline:
         attn_dict = self.attn_visualizer.get_temporal_attention(x_seq)
         max_label, max_idx, max_weight = self.attn_visualizer.get_most_influential_timestep(x_seq)
         attn_text = self.attn_visualizer.generate_temporal_explanation(x_seq)
+        
+        elapsed_sec = time.time() - start_t
         
         return {
             "source": "PCAP",
@@ -255,7 +263,9 @@ class PCAPPredictivePipeline:
             "attention_weights": attn_dict["attention_weights"],
             "most_influential_timestep": max_label,
             "most_influential_weight": float(max_weight),
-            "temporal_explanation": attn_text
+            "temporal_explanation": attn_text,
+            "inference_timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "execution_time_seconds": round(float(elapsed_sec), 3)
         }
 
 if __name__ == "__main__":

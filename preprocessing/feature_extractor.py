@@ -200,7 +200,7 @@ class PCAPFeatureExtractor:
         """Converts internal flows dict into pandas DataFrame matching CSV preprocessed schema."""
         records = []
         for (src_ip, dst_ip, src_port, dst_port, proto), f in self.flows.items():
-            duration_us = max((f["end_time"] - f["start_time"]) * 1000000.0, 1.0)
+            duration_us = max((f["end_time"] - f["start_time"]) * 1000000.0, 1000.0)
             duration_sec = duration_us / 1000000.0
             
             fwd_pkts = f["fwd_pkts"]
@@ -226,8 +226,8 @@ class PCAPFeatureExtractor:
                 "TotLen Bwd Pkts": bwd_bytes,
                 "Fwd Pkt Len Mean": fwd_len_mean,
                 "Bwd Pkt Len Mean": bwd_len_mean,
-                "Flow Byts/s": float(tot_bytes / (duration_sec + 1e-5)),
-                "Flow Pkts/s": float(tot_pkts / (duration_sec + 1e-5)),
+                "Flow Byts/s": float(tot_bytes / duration_sec),
+                "Flow Pkts/s": float(tot_pkts / duration_sec),
                 "SYN Flag Cnt": f["syn_cnt"],
                 "ACK Flag Cnt": f["ack_cnt"],
                 "RST Flag Cnt": f["rst_cnt"],

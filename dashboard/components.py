@@ -226,3 +226,38 @@ def render_model_info_expander(config: dict):
             st.markdown(f"- **SHAP**: v{shap.__version__}")
             st.markdown(f"- **Scapy**: v{scapy.__version__}")
             st.markdown(f"- **Execution Device**: {'CUDA' if torch.cuda.is_available() else 'CPU'}")
+
+def render_inference_debug_info(res: dict, target_pcap_path: Path):
+    """Renders expandable Inference Debug & Lineage Information section (Part 5 requirement)."""
+    with st.expander("🔍 Inference Debug & Lineage Information", expanded=True):
+        col1, col2 = st.columns(2)
+        
+        import hashlib
+        md5_hash = "N/A"
+        file_size_kb = 0.0
+        if target_pcap_path and target_pcap_path.exists():
+            try:
+                md5_hash = hashlib.md5(target_pcap_path.read_bytes()).hexdigest()
+                file_size_kb = target_pcap_path.stat().st_size / 1024.0
+            except Exception:
+                pass
+                
+        with col1:
+            st.markdown("**PCAP Telemetry & Lineage Details:**")
+            st.markdown(f"- **PCAP Filename**: `{target_pcap_path.name if target_pcap_path else res.get('pcap_file', 'N/A')}`")
+            st.markdown(f"- **File Size**: `{file_size_kb:.1f} KB`")
+            st.markdown(f"- **MD5 Hash**: `{md5_hash}`")
+            st.markdown(f"- **Total Flow Count**: `{res.get('flow_count', 0)}`")
+            st.markdown(f"- **Temporal 5s Windows**: `{res.get('window_count', 0)}`")
+            st.markdown(f"- **Base Feature Shape**: `(10, 69)` (50s Context)")
+            st.markdown(f"- **XGBoost Feature Vector**: `(1, 489)` Features")
+
+        with col2:
+            st.markdown("**Runtime Inference Environment:**")
+            st.markdown(f"- **Inference Timestamp**: `{res.get('inference_timestamp', 'N/A')}`")
+            st.markdown(f"- **Pipeline Execution Time**: `{res.get('execution_time_seconds', 0.0):.3f} seconds`")
+            st.markdown(f"- **World Model Architecture**: PyTorch 2-Layer LSTM + Attention Core")
+            st.markdown(f"- **Risk & Stage Predictors**: XGBoost Risk Model & XGBoost 6-Class Stage Model")
+            st.markdown(f"- **Explainability Engines**: TreeSHAP (Local & Group) + PyTorch Attention")
+            st.markdown(f"- **Execution Device**: {'CUDA (GPU)' if torch.cuda.is_available() else 'CPU (Fallback)'}")
+

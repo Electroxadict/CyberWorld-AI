@@ -81,21 +81,33 @@ def generate_synthetic_dataset(output_path):
     rst_flags = np.zeros(num_samples, dtype=int)
     
     for i in range(num_samples):
-        # Interleave normal traffic with periodic attack windows
-        if (i % 200 >= 140 and i % 200 < 160) or (i >= 300 and i < 400):
+        # Interleave all 6 MITRE stages across the timeline
+        period_idx = (i // 50) % 6
+        if period_idx == 1:
             labels.append("Reconnaissance-PortScan")
             syn_flags[i] = 1
             ack_flags[i] = 0
-        elif (i % 200 >= 160 and i % 200 < 180) or (i >= 700 and i < 800):
+            dst_ports[i] = int(1000 + (i % 500))
+        elif period_idx == 2:
             labels.append("SSH-Bruteforce")
             dst_ports[i] = 22
-        elif (i % 200 >= 180 and i % 200 < 190) or (i >= 1200 and i < 1400):
+            syn_flags[i] = 1
+            rst_flags[i] = 1 if i % 2 == 0 else 0
+        elif period_idx == 3:
             labels.append("DoS-DoS attack-HOIC")
-            fwd_pkts[i] *= 10
-            fwd_bytes[i] *= 10
-        elif i >= 1700:
+            dst_ports[i] = 445
+            fwd_pkts[i] *= 5
+            fwd_bytes[i] *= 5
+        elif period_idx == 4:
+            labels.append("Bot-C2")
+            dst_ports[i] = 8080
+            fwd_pkts[i] = 2
+            bwd_pkts[i] = 2
+        elif period_idx == 5:
             labels.append("Data-Exfiltration")
-            bwd_bytes[i] *= 25
+            dst_ports[i] = 443
+            fwd_bytes[i] *= 20
+            bwd_bytes[i] *= 20
             rst_flags[i] = 1
         else:
             labels.append("BENIGN")

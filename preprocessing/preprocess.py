@@ -52,7 +52,7 @@ def map_attack_stage(label_str):
             return stage
     return 1 if clean_label != "benign" and clean_label != "normal" else 0
 
-def clean_dataframe(df):
+def clean_dataframe(df, drop_zero_variance=True):
     """Clean column names, handle NaNs, infs, duplicate rows, and data types."""
     # 1. Clean column names (strip whitespace)
     df.columns = [str(c).strip() for c in df.columns]
@@ -105,13 +105,14 @@ def clean_dataframe(df):
     # Fill remaining NaNs (if any median was NaN) with 0
     df[numeric_df_cols] = df[numeric_df_cols].fillna(0)
     
-    # Drop zero variance (constant) numeric columns
-    std = df[numeric_df_cols].std()
-    constant_cols = std[std == 0].index.tolist()
-    if constant_cols:
-        logger.info(f"Dropping {len(constant_cols)} zero-variance numeric columns.")
-        df = df.drop(columns=constant_cols)
-        numeric_df_cols = [c for c in numeric_df_cols if c not in constant_cols]
+    # Drop zero variance (constant) numeric columns (only during training preprocessing)
+    if drop_zero_variance:
+        std = df[numeric_df_cols].std()
+        constant_cols = std[std == 0].index.tolist()
+        if constant_cols:
+            logger.info(f"Dropping {len(constant_cols)} zero-variance numeric columns.")
+            df = df.drop(columns=constant_cols)
+            numeric_df_cols = [c for c in numeric_df_cols if c not in constant_cols]
 
     logger.info(f"Cleaned dataset: {len(df)} rows, {len(numeric_df_cols)} numeric feature columns.")
     return df
