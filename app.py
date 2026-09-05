@@ -23,6 +23,8 @@ from dashboard.components import (
     render_status_bar,
     render_kpi_cards,
     render_main_status_panel,
+    render_mode_indicator,
+    render_progression_stepper,
     render_pipeline_flow,
     render_model_info_expander,
     render_inference_debug_info
@@ -35,6 +37,7 @@ from dashboard.charts import (
     create_shap_group_chart,
     create_attention_chart
 )
+from dashboard.demo_scenarios import DEMO_SCENARIOS, get_demo_scenario_result
 from attack_mapping.mitre_mapper import MitreStageMapper
 from scripts.generate_sih_demo_pcaps import generate_all_sih_pcaps
 
@@ -80,40 +83,33 @@ def main():
     scenario_choice = st.sidebar.radio(
         "Select Demo Scenario / Input PCAP:",
         [
-            "PCAP 1 — Normal Traffic",
-            "PCAP 2 — Port Scanning / Reconnaissance",
-            "PCAP 3 — Brute Force / Initial Access",
-            "PCAP 4 — Lateral Movement",
-            "PCAP 5 — Data Exfiltration",
+            "PCAP 1 — Safe / Normal Traffic",
+            "PCAP 2 — Mild Attack",
+            "PCAP 3 — Risk",
+            "PCAP 4 — Danger",
+            "PCAP 5 — Network Compromised",
             "Select Existing PCAP File",
             "Upload Custom PCAP File (.pcap / .pcapng)"
         ]
     )
     
     target_pcap_path = None
-    is_synthetic_sample = False
+    is_custom_mode = False
     
-    if scenario_choice == "PCAP 1 — Normal Traffic":
-        target_pcap_path = data_dir / "pcap_1_normal.pcap"
-    elif scenario_choice == "PCAP 2 — Port Scanning / Reconnaissance":
-        target_pcap_path = data_dir / "pcap_2_reconnaissance.pcap"
-    elif scenario_choice == "PCAP 3 — Brute Force / Initial Access":
-        target_pcap_path = data_dir / "pcap_3_initial_access.pcap"
-    elif scenario_choice == "PCAP 4 — Lateral Movement":
-        target_pcap_path = data_dir / "pcap_4_lateral_movement.pcap"
-    elif scenario_choice == "PCAP 5 — Data Exfiltration":
-        target_pcap_path = data_dir / "pcap_5_exfiltration.pcap"
+    if scenario_choice in DEMO_SCENARIOS:
+        demo_cfg = DEMO_SCENARIOS[scenario_choice]
+        target_pcap_path = data_dir / demo_cfg["pcap_filename"]
     elif scenario_choice == "Select Existing PCAP File":
+        is_custom_mode = True
         existing_files = sorted(list(data_dir.glob("*.pcap")) + list(data_dir.glob("*.pcapng")))
         file_names = [f.name for f in existing_files]
         if file_names:
             selected_name = st.sidebar.selectbox("Choose PCAP File:", file_names)
             target_pcap_path = data_dir / selected_name
-            if selected_name == "sample_test.pcap":
-                is_synthetic_sample = True
         else:
             st.sidebar.error("No existing .pcap files found in data/raw/.")
     else:
+        is_custom_mode = True
         uploaded_file = st.sidebar.file_uploader("Upload .pcap or .pcapng file", type=["pcap", "pcapng"])
         if uploaded_file is not None:
             uploaded_save_path = data_dir / f"uploaded_{uploaded_file.name}"
@@ -130,24 +126,38 @@ def main():
     
     analyze_btn = st.sidebar.button("🚀 Re-Run Inference", use_container_width=True)
     
-    # State tracking: Check if selected PCAP path changed
-    current_path_str = str(target_pcap_path) if target_pcap_path else None
-    last_path_str = st.session_state.get("last_analyzed_pcap")
+    # State tracking: Check if selected scenario or PCAP path changed
+    current_key = f"{scenario_choice}_{target_pcap_path.name if target_pcap_path else ''}"
+    last_key = st.session_state.get("last_analyzed_key")
     
     should_run_inference = (
         target_pcap_path is not None
         and target_pcap_path.exists()
-        and (current_path_str != last_path_str or analyze_btn or st.session_state.get("prediction_result") is None)
+        and (current_key != last_key or analyze_btn or st.session_state.get("prediction_result") is None)
     )
     
     if should_run_inference:
-        with st.spinner(f"Running ML Pipeline for {target_pcap_path.name}..."):
+        with st.spinner(f"Processing {'Demo Scenario' if not is_custom_mode else 'Custom PCAP'} for {target_pcap_path.name}..."):
             try:
-                res = pipeline.predict(target_pcap_path)
+                # Run real ML pipeline for feature extraction, SHAP & Attention (Option A)
+                real_pipeline_res = pipeline.predict(target_pcap_path)
+                
+                if is_custom_mode:
+                    # REAL PCAP INFERENCE MODE (Live model outcomes)
+                    res = real_pipeline_res
+                    res["mode"] = "REAL PCAP INFERENCE"
+                    res["is_demo_mode"] = False
+                    res["security_status"] = res["risk_level"]
+                    res["status_level"] = res["risk_level"]
+                    res["progression_step"] = 0
+                else:
+                    # DEMO MODE — SCENARIO SIMULATION
+                    res = get_demo_scenario_result(scenario_choice, real_pipeline_res)
+                    
                 st.session_state["prediction_result"] = res
-                st.session_state["last_analyzed_pcap"] = current_path_str
+                st.session_state["last_analyzed_key"] = current_key
                 st.session_state["target_pcap_path"] = target_pcap_path
-                st.session_state["is_synthetic"] = is_synthetic_sample
+                st.session_state["is_custom_mode"] = is_custom_mode
                 
                 # Save output log (DO NOT READ FROM IT FOR PREDICTION)
                 logs_dir = PROJECT_ROOT / "logs"
@@ -166,8 +176,10 @@ def main():
         st.info("👈 Please select or upload a .pcap file in the sidebar.")
         return
         
-    if st.session_state.get("is_synthetic", False):
-        st.warning("⚠️ **NOTICE**: Currently analyzing `sample_test.pcap` — SYNTHETIC TEST FIXTURE generated via Scapy. Results reflect synthetic flow attributes.")
+    # Render Mode Indicator & Scenario Progression Stepper
+    render_mode_indicator(res)
+    if res.get("is_demo_mode", False):
+        render_progression_stepper(res)
         
     # Render Top KPI Cards & Security Status Panel
     render_main_status_panel(res)
@@ -229,7 +241,7 @@ def main():
             st.markdown("### 🎯 Predicted MITRE ATT&CK Stage")
             stage_info = mitre_mapper.explain_mapping(res["predicted_stage"])
             st.markdown(f"**Current Stage ID**: `{res['predicted_stage']}`")
-            st.markdown(f"**Stage Name**: `{stage_info['stage_name']}`")
+            st.markdown(f"**Stage Name**: `{res['stage_name']}`")
             st.markdown(f"**Technical Reason**: {stage_info['reason']}")
             st.info(f"**Description**: {stage_info['description']}")
             
@@ -237,8 +249,9 @@ def main():
         st.markdown("### ⚠️ Early Warning Alert Assessment")
         if res["warning_triggered"]:
             st.error(f"⚠️ **ALERT TRIGGERED**: {res['warning_message']}")
-            if res['time_to_high_risk'] is not None:
-                st.markdown(f"**Estimated Time to High Risk Threshold**: `{res['time_to_high_risk']} seconds`")
+            t_disp = res.get("time_to_high_risk_display")
+            if t_disp:
+                st.markdown(f"**Estimated Time to High Risk Threshold**: `{t_disp}`")
         else:
             st.success(f"✓ **NORMAL**: {res['warning_message']}")
 
@@ -291,7 +304,6 @@ def main():
     with tab5:
         st.subheader("Inference Debug Lineage & System Architecture")
         
-        # PART 5: Inference Debug Information Expander
         render_inference_debug_info(res, active_path)
         
         render_pipeline_flow()

@@ -166,26 +166,32 @@ def render_kpi_cards(res: dict):
         )
         
     with col5:
-        t_high = res["time_to_high_risk"]
+        if "time_to_high_risk_display" in res:
+            t_display = res["time_to_high_risk_display"]
+        else:
+            t_high = res.get("time_to_high_risk")
+            t_display = f"~{t_high}s" if t_high is not None else "N/A (Safe)"
+            
         st.metric(
             label="Time to High Risk",
-            value=f"~{t_high}s" if t_high is not None else "N/A (Low)"
+            value=t_display
         )
 
 def render_main_status_panel(res: dict):
     """Renders prominent security status alert panel."""
     level = res["risk_level"]
     msg = res["warning_message"]
+    sec_status = res.get("security_status", level)
     
-    if level in ["HIGH", "CRITICAL"] or res["warning_triggered"]:
+    if sec_status in ["NETWORK COMPROMISED", "DANGER"] or level in ["HIGH", "CRITICAL"] or res.get("warning_triggered", False):
         banner_class = "status-banner-critical"
-        status_text = "CRITICAL / WARNING — ELEVATED ATTACK PROGRESSION DETECTED"
-    elif level == "MODERATE":
+        status_text = f"SECURITY STATUS: {sec_status} — {res.get('warning_priority', 'ELEVATED ATTACK PROGRESSION DETECTED')}"
+    elif sec_status in ["MILD ATTACK", "RISK"] or level == "MODERATE":
         banner_class = "status-banner-warning"
-        status_text = "MODERATE RISK — ANOMALOUS ACTIVITY MONITORING"
+        status_text = f"SECURITY STATUS: {sec_status} — ANOMALOUS ACTIVITY MONITORING"
     else:
         banner_class = "status-banner-normal"
-        status_text = "NORMAL OPERATIONAL BASELINE — SYSTEM SECURE"
+        status_text = f"SECURITY STATUS: {sec_status} — SYSTEM SECURE"
         
     st.markdown(f"""
     <div class="{banner_class}">
@@ -193,6 +199,64 @@ def render_main_status_panel(res: dict):
         <p style="margin: 0; font-size: 14px;">{msg}</p>
     </div>
     """, unsafe_allow_html=True)
+
+def render_mode_indicator(res: dict):
+    """Renders prominent top badge indicating DEMO MODE vs REAL PCAP INFERENCE."""
+    is_demo = res.get("is_demo_mode", False)
+    if is_demo:
+        mode_title = "🧪 DEMO MODE — SCENARIO SIMULATION"
+        mode_subtitle = "Displaying progressive scenario simulation values for SIH demonstration. Feature drivers & attention weights derived from live model execution."
+        badge_style = "background-color: rgba(245, 158, 11, 0.2); border: 1px solid #F59E0B; color: #F59E0B;"
+    else:
+        mode_title = "⚡ REAL PCAP INFERENCE"
+        mode_subtitle = "Displaying live predictions, risk scores, and stage classifications computed directly by trained PyTorch & XGBoost ML models."
+        badge_style = "background-color: rgba(16, 185, 129, 0.2); border: 1px solid #10B981; color: #10B981;"
+        
+    full_html = f'<div style="{badge_style} border-radius: 6px; padding: 10px 16px; margin-bottom: 16px;"><div style="font-weight: 700; font-size: 15px;">{mode_title}</div><div style="font-size: 12px; opacity: 0.9;">{mode_subtitle}</div></div>'
+    st.markdown(full_html, unsafe_allow_html=True)
+
+def render_progression_stepper(res: dict):
+    """Renders visual scenario progression stepper for SIH presentation."""
+    current_step = res.get("progression_step", 1)
+    
+    steps = [
+        ("1. SAFE", "LOW"),
+        ("2. MILD ATTACK", "MODERATE"),
+        ("3. RISK", "HIGH"),
+        ("4. DANGER", "CRITICAL"),
+        ("5. NETWORK COMPROMISED", "CRITICAL")
+    ]
+    
+    colors = {
+        1: ("#10B981", "rgba(16, 185, 129, 0.2)"), # Green
+        2: ("#F59E0B", "rgba(245, 158, 11, 0.2)"), # Amber
+        3: ("#F97316", "rgba(249, 115, 22, 0.2)"), # Orange
+        4: ("#EF4444", "rgba(239, 68, 68, 0.2)"), # Red
+        5: ("#DC2626", "rgba(220, 38, 38, 0.3)")  # Deep Red
+    }
+    
+    items_html = []
+    for idx, (label, level_tag) in enumerate(steps, start=1):
+        main_color, bg_color = colors[idx]
+        
+        if idx == current_step:
+            # ACTIVE STATE
+            item_str = f'<div style="flex: 1; min-width: 130px; background: {bg_color}; border: 2px solid {main_color}; color: {main_color}; border-radius: 8px; padding: 10px 6px; text-align: center; font-weight: 700; box-shadow: 0 0 12px {main_color}50;"><div style="font-size: 13px; letter-spacing: 0.5px;">{label}</div><div style="font-size: 11px; font-weight: 800; margin-top: 4px; color: {main_color};">● ACTIVE ✓</div></div>'
+        elif idx < current_step:
+            # COMPLETED STATE
+            item_str = f'<div style="flex: 1; min-width: 130px; background: rgba(31, 41, 55, 0.6); border: 1px solid #4B5563; color: #9CA3AF; border-radius: 8px; padding: 10px 6px; text-align: center; font-weight: 600;"><div style="font-size: 13px; text-decoration: line-through; opacity: 0.8;">{label}</div><div style="font-size: 10px; margin-top: 4px; color: #10B981;">✓ PASSED</div></div>'
+        else:
+            # INACTIVE / FUTURE STATE
+            item_str = f'<div style="flex: 1; min-width: 130px; background: #111827; border: 1px dashed #374151; color: #4B5563; border-radius: 8px; padding: 10px 6px; text-align: center;"><div style="font-size: 13px;">{label}</div><div style="font-size: 10px; margin-top: 4px; color: #6B7280;">○ PENDING</div></div>'
+            
+        items_html.append(item_str)
+        
+        if idx < len(steps):
+            sep_color = "#10B981" if idx < current_step else "#374151"
+            items_html.append(f'<div style="color: {sep_color}; font-size: 16px; font-weight: 700; padding: 0 2px;">➔</div>')
+            
+    full_html = '<div style="display: flex; gap: 6px; margin-bottom: 24px; align-items: center; justify-content: space-between; overflow-x: auto; padding: 4px 0;">' + "".join(items_html) + '</div>'
+    st.markdown(full_html, unsafe_allow_html=True)
 
 def render_pipeline_flow():
     """Renders visual architecture pipeline flow diagram."""

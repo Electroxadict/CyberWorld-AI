@@ -5,23 +5,23 @@
   },
   {
     "feature": "fut_min_Dst Port_std",
-    "mean_abs_shap": 0.6055492162704468
-  },
-  {
-    "feature": "fut_mean_Protocol_mean",
-    "mean_abs_shap": 0.026277605444192886
+    "mean_abs_shap": 0.5987563729286194
   },
   {
     "feature": "fut_min_TotLen Bwd Pkts_max",
-    "mean_abs_shap": 0.02575673721730709
+    "mean_abs_shap": 0.025920536369085312
+  },
+  {
+    "feature": "fut_mean_Protocol_mean",
+    "mean_abs_shap": 0.025868307799100876
   },
   {
     "feature": "fut_min_Flow Pkts/s_min",
-    "mean_abs_shap": 0.025604888796806335
+    "mean_abs_shap": 0.02565167285501957
   },
   {
     "feature": "fut_max_Protocol_mean",
-    "mean_abs_shap": 0.025387514382600784
+    "mean_abs_shap": 0.02536121942102909
   },
   {
     "feature": "fut_max_Src Port_max",
@@ -29,7 +29,7 @@
   },
   {
     "feature": "fut_mean_Dst Port_std",
-    "mean_abs_shap": 0.024118483066558838
+    "mean_abs_shap": 0.0241217203438282
   },
   {
     "feature": "fut_max_Flow Duration_min",
