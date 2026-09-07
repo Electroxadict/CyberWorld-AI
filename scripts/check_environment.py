@@ -80,6 +80,20 @@ def check_env():
             print(f"[FAIL] {art:<23}: MISSING")
             all_passed = False
             
+    # 5. Live Capture Engine & Interface Check
+    print("-" * 60)
+    print("REAL-TIME LIVE NETWORK ENGINE CHECKS:")
+    print("-" * 60)
+    try:
+        from preprocessing.live_capture import get_available_interfaces, get_live_capture_engine
+        ifaces = get_available_interfaces()
+        engine = get_live_capture_engine()
+        print(f"[PASS] Live Capture Engine   : Ready (Configured Iface: {engine.selected_interface})")
+        print(f"[PASS] Network Interfaces    : {len(ifaces)} detected ({', '.join(ifaces[:3])}...)")
+    except Exception as e:
+        print(f"[FAIL] Live Capture Engine   : {e}")
+        all_passed = False
+
     print("=" * 60)
     if all_passed:
         print("OVERALL STATUS: PASS (System fully configured & ready)")

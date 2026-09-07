@@ -165,10 +165,16 @@ python scripts/run_pipeline.py --pcap data/raw/sample_test.pcap --horizon 5 --ex
 streamlit run app.py
 ```
 
-### 5. Automated Test Suite (PyTest)
+### 5. Real-Time Terminal SOC Monitor
+```cmd
+python scripts/live_soc.py
+```
+
+### 6. Automated Test Suite (PyTest)
 ```cmd
 python -m pytest
 ```
+
 
 ---
 

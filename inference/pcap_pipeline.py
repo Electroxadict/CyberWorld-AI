@@ -212,6 +212,22 @@ class PCAPPredictivePipeline:
         # 2. 5-Second Window Aggregation
         df_windows = self.create_temporal_windows(df_flows)
         
+        return self.predict_windows(
+            df_windows=df_windows,
+            source_name="PCAP",
+            identifier=pcap_p.name,
+            flow_count=len(df_flows)
+        )
+
+    def predict_windows(self, df_windows: pd.DataFrame, source_name: str = "Live Monitoring", identifier: str = "live_stream", flow_count: int = None) -> dict:
+        """
+        Executes complete ML predictive pipeline on 5-second temporal state windows.
+        Works seamlessly for both PCAP and Live Network Monitoring.
+        """
+        import time
+        from datetime import datetime
+        start_t = time.time()
+        
         # 3. Schema Validation & Feature Scaling
         scaled_matrix = self.validate_and_scale_features(df_windows)
         
@@ -242,9 +258,9 @@ class PCAPPredictivePipeline:
         elapsed_sec = time.time() - start_t
         
         return {
-            "source": "PCAP",
-            "pcap_file": pcap_p.name,
-            "flow_count": len(df_flows),
+            "source": source_name,
+            "pcap_file": identifier,
+            "flow_count": flow_count if flow_count is not None else len(df_windows),
             "window_count": len(df_windows),
             "current_attack_probability": float(xgb_res["attack_probability"]),
             "risk_score": float(ew_analysis["current_risk"]),
@@ -270,3 +286,4 @@ class PCAPPredictivePipeline:
 
 if __name__ == "__main__":
     logger.info("PCAPPredictivePipeline ready.")
+

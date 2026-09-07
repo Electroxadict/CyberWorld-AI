@@ -12,6 +12,8 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 import streamlit as st
+import pandas as pd
+import numpy as np
 import torch
 import xgboost
 import shap
@@ -103,17 +105,86 @@ def inject_dark_soc_css():
         margin-bottom: 20px;
     }
     
-    /* Metric Card Custom Styling */
+    /* Metric Card Custom Styling & Animations */
+    @keyframes kpi-pulse {
+        0% { border-color: #374151; box-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+        50% { border-color: #3B82F6; box-shadow: 0 0 10px rgba(59,130,246,0.3); }
+        100% { border-color: #374151; box-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+    }
+    
     div[data-testid="stMetric"] {
         background-color: #1F2937;
         border: 1px solid #374151;
-        border-radius: 6px;
-        padding: 12px 16px;
+        border-radius: 8px;
+        padding: 12px 14px;
         box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    div[data-testid="stMetric"]:hover {
+        transform: translateY(-2px);
+        border-color: #60A5FA;
+    }
+
+    /* Live Status Indicators */
+    .live-badge-active {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 12px;
+        border-radius: 9999px;
+        background-color: rgba(16, 185, 129, 0.2);
+        color: #10B981;
+        border: 1px solid #10B981;
+        font-weight: 700;
+        font-size: 13px;
+        box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+    }
+
+    .live-badge-stopped {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 12px;
+        border-radius: 9999px;
+        background-color: rgba(239, 68, 68, 0.2);
+        color: #EF4444;
+        border: 1px solid #EF4444;
+        font-weight: 700;
+        font-size: 13px;
+    }
+
+    /* Table status tag styles */
+    .status-tag {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-weight: 600;
+        font-size: 11px;
+    }
+    .status-normal { background: rgba(16, 185, 129, 0.2); color: #10B981; border: 1px solid #10B981; }
+    .status-suspicious { background: rgba(245, 158, 11, 0.2); color: #F59E0B; border: 1px solid #F59E0B; }
+    .status-highrisk { background: rgba(249, 115, 22, 0.2); color: #F97316; border: 1px solid #F97316; }
+    .status-critical { background: rgba(239, 68, 68, 0.25); color: #EF4444; border: 1px solid #EF4444; }
+
+    /* Scrollable Live Table Container */
+    .live-table-container {
+        max-height: 380px;
+        overflow-y: auto;
+        border: 1px solid #374151;
+        border-radius: 8px;
+        background-color: #111827;
+    }
+
+    /* Responsive containers */
+    @media (max-width: 1400px) {
+        div[data-testid="stMetric"] {
+            padding: 8px 10px;
+        }
     }
     </style>
     """
     st.markdown(css, unsafe_allow_html=True)
+
 
 def render_header():
     """Renders dashboard top header."""
@@ -324,4 +395,278 @@ def render_inference_debug_info(res: dict, target_pcap_path: Path):
             st.markdown(f"- **Risk & Stage Predictors**: XGBoost Risk Model & XGBoost 6-Class Stage Model")
             st.markdown(f"- **Explainability Engines**: TreeSHAP (Local & Group) + PyTorch Attention")
             st.markdown(f"- **Execution Device**: {'CUDA (GPU)' if torch.cuda.is_available() else 'CPU (Fallback)'}")
+
+# --- RESPONSIVE SOC DASHBOARD COMPONENTS ---
+
+def render_threat_level_progression(risk_score: float):
+    """
+    Renders horizontal threat level progression highlighting active level.
+    Risk mapping:
+    0–20: SAFE
+    21–40: MILD ATTACK
+    41–60: RISK
+    61–80: DANGER
+    81–100: NETWORK COMPROMISED
+    """
+    if risk_score <= 20:
+        active_idx = 1
+        curr_label = "SAFE"
+    elif risk_score <= 40:
+        active_idx = 2
+        curr_label = "MILD ATTACK"
+    elif risk_score <= 60:
+        active_idx = 3
+        curr_label = "RISK"
+    elif risk_score <= 80:
+        active_idx = 4
+        curr_label = "DANGER"
+    else:
+        active_idx = 5
+        curr_label = "NETWORK COMPROMISED"
+
+    stages = [
+        (1, "SAFE", "0-20", "#10B981", "rgba(16, 185, 129, 0.2)"),
+        (2, "MILD ATTACK", "21-40", "#F59E0B", "rgba(245, 158, 11, 0.2)"),
+        (3, "RISK", "41-60", "#F97316", "rgba(249, 115, 22, 0.2)"),
+        (4, "DANGER", "61-80", "#EF4444", "rgba(239, 68, 68, 0.25)"),
+        (5, "NETWORK COMPROMISED", "81-100", "#DC2626", "rgba(220, 38, 38, 0.3)")
+    ]
+
+    items_html = []
+    for idx, name, rng, border_col, bg_col in stages:
+        if idx == active_idx:
+            # ACTIVE HIGHLIGHT
+            item = f'<div style="flex: 1; min-width: 140px; background: {bg_col}; border: 2px solid {border_col}; border-radius: 8px; padding: 8px 6px; text-align: center; font-weight: 700; color: {border_col}; box-shadow: 0 0 14px {border_col}60;"><div style="font-size: 13px; letter-spacing: 0.5px;">{name}</div><div style="font-size: 11px; opacity: 0.9; margin-top: 2px;">{rng} ● ACTIVE</div></div>'
+        elif idx < active_idx:
+            # PREVIOUS / PASSED LEVEL
+            item = f'<div style="flex: 1; min-width: 140px; background: rgba(31, 41, 55, 0.5); border: 1px solid #4B5563; border-radius: 8px; padding: 8px 6px; text-align: center; color: #9CA3AF;"><div style="font-size: 12px;">{name}</div><div style="font-size: 10px; color: #10B981; margin-top: 2px;">✓ BELOW</div></div>'
+        else:
+            # FUTURE LEVEL
+            item = f'<div style="flex: 1; min-width: 140px; background: #111827; border: 1px dashed #374151; border-radius: 8px; padding: 8px 6px; text-align: center; color: #6B7280;"><div style="font-size: 12px;">{name}</div><div style="font-size: 10px; margin-top: 2px;">{rng}</div></div>'
+            
+        items_html.append(item)
+
+    full_html = '<div style="display: flex; gap: 8px; margin-bottom: 20px; align-items: center; justify-content: space-between; overflow-x: auto; padding: 2px 0;">' + "".join(items_html) + '</div>'
+    st.markdown(full_html, unsafe_allow_html=True)
+
+def render_responsive_kpi_row(metrics: dict, res: dict):
+    """
+    Renders top row of 8 responsive live KPI metric cards.
+    Displays:
+    1. Active Connections
+    2. Packets/sec
+    3. Bandwidth (Mbps)
+    4. Total Flows
+    5. Risk Score
+    6. Attack Probability
+    7. Current MITRE Stage
+    8. Threat Level
+    """
+    col1, col2, col3, col4 = st.columns(4)
+    col5, col6, col7, col8 = st.columns(4)
+    
+    # Extract live or pipeline metrics
+    active_conns = metrics.get("active_connections", res.get("flow_count", 0))
+    pps = metrics.get("packets_per_sec", 0.0)
+    mbps = metrics.get("bandwidth_mbps", 0.0)
+    tot_flows = metrics.get("total_flows", res.get("flow_count", 0))
+    
+    risk_score = res.get("risk_score", 12.0)
+    attack_prob = res.get("current_attack_probability", 0.05)
+    mitre_stage = res.get("stage_name", "Normal")
+    
+    # Calculate Threat Level
+    if risk_score <= 20:
+        threat_level = "SAFE"
+    elif risk_score <= 40:
+        threat_level = "MILD ATTACK"
+    elif risk_score <= 60:
+        threat_level = "RISK"
+    elif risk_score <= 80:
+        threat_level = "DANGER"
+    else:
+        threat_level = "COMPROMISED"
+
+    with col1:
+        st.metric(label="Active Connections", value=f"{active_conns:,}")
+    with col2:
+        st.metric(label="Packets / Sec", value=f"{pps:.1f}")
+    with col3:
+        st.metric(label="Bandwidth (Mbps)", value=f"{mbps:.3f}")
+    with col4:
+        st.metric(label="Total Flows", value=f"{tot_flows:,}")
+        
+    with col5:
+        st.metric(label="Risk Score (0-100)", value=f"{risk_score:.1f} / 100")
+    with col6:
+        st.metric(label="Attack Probability", value=f"{attack_prob * 100.0:.1f}%")
+    with col7:
+        st.metric(label="Current MITRE Stage", value=mitre_stage)
+    with col8:
+        st.metric(label="Threat Level", value=threat_level)
+
+def render_mitre_panel(predicted_stage: int, stage_probabilities: list = None):
+    """
+    Renders MITRE ATT&CK Matrix panel highlighting detected stage with probability beside each.
+    Stages:
+    - Normal (0)
+    - Reconnaissance (1)
+    - Initial Access (2)
+    - Lateral Movement (3)
+    - Command & Control (4)
+    - Exfiltration (5)
+    """
+    stages = [
+        (0, "Normal", "Benign baseline activity"),
+        (1, "Reconnaissance", "Port scanning & discovery"),
+        (2, "Initial Access", "Brute-force / entry attempts"),
+        (3, "Lateral Movement", "Internal pivoting / DoS"),
+        (4, "Command & Control", "C2 beaconing & botnet"),
+        (5, "Exfiltration", "Data theft / anomalous upload")
+    ]
+    
+    if not stage_probabilities or len(stage_probabilities) < 6:
+        stage_probabilities = [0.0] * 6
+        if 0 <= predicted_stage < 6:
+            stage_probabilities[predicted_stage] = 0.85
+            
+    items_html = []
+    for s_idx, s_name, s_desc in stages:
+        p_val = stage_probabilities[s_idx] * 100.0 if s_idx < len(stage_probabilities) else 0.0
+        
+        if s_idx == predicted_stage:
+            card_html = f"""
+            <div style="background: rgba(239, 68, 68, 0.2); border: 2px solid #EF4444; border-radius: 8px; padding: 12px; margin-bottom: 8px; box-shadow: 0 0 10px rgba(239,68,68,0.3);">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="font-weight: 700; color: #EF4444; font-size: 15px;">Stage {s_idx}: {s_name}</div>
+                    <div style="background: #EF4444; color: white; padding: 2px 8px; border-radius: 4px; font-weight: 700; font-size: 12px;">{p_val:.1f}% ● DETECTED</div>
+                </div>
+                <div style="font-size: 12px; color: #D1D5DB; margin-top: 4px;">{s_desc}</div>
+            </div>
+            """
+        else:
+            card_html = f"""
+            <div style="background: #1F2937; border: 1px solid #374151; border-radius: 8px; padding: 10px; margin-bottom: 8px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="font-weight: 600; color: #9CA3AF; font-size: 14px;">Stage {s_idx}: {s_name}</div>
+                    <div style="color: #60A5FA; font-weight: 600; font-size: 12px;">{p_val:.1f}%</div>
+                </div>
+                <div style="font-size: 11px; color: #6B7280; margin-top: 2px;">{s_desc}</div>
+            </div>
+            """
+        items_html.append(card_html)
+        
+    full_html = "".join(items_html)
+    st.markdown(full_html, unsafe_allow_html=True)
+
+def render_early_warning_panel(res: dict):
+    """
+    Renders Early Warning alert box with levels (LOW, MODERATE, HIGH, CRITICAL),
+    warning message, time to high risk, and recommended operational action.
+    """
+    risk = res.get("risk_score", 12.0)
+    t_high = res.get("time_to_high_risk")
+    t_high_str = f"~{t_high} seconds" if t_high is not None and t_high > 0 else ("CURRENTLY CRITICAL" if risk >= 75 else "N/A (Safe)")
+    msg = res.get("warning_message", "Network activity is operating within baseline security parameters.")
+    stage = res.get("stage_name", "Normal")
+    
+    if risk >= 75:
+        level_str = "🔴 CRITICAL ALERT"
+        box_class = "status-banner-critical"
+        action = f"Immediate defensive isolation of host. Terminate abnormal sessions in stage '{stage}'."
+    elif risk >= 50:
+        level_str = "🟠 HIGH ADVISORY"
+        box_class = "status-banner-critical"
+        action = f"Escalate monitoring on affected endpoints. Inspect suspicious TCP/UDP flows."
+    elif risk >= 25:
+        level_str = "🟡 MODERATE WARNING"
+        box_class = "status-banner-warning"
+        action = "Review anomalous port scan and burst activity. Monitor perimeter firewall logs."
+    else:
+        level_str = "🟢 LOW RISK (NORMAL)"
+        box_class = "status-banner-normal"
+        action = "Baseline network activity within normal parameters. Routine SOC monitoring active."
+
+    st.markdown(f"""
+    <div class="{box_class}">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-weight: 800; font-size: 16px;">{level_str}</span>
+            <span style="font-size: 12px; font-weight: 600; background: rgba(0,0,0,0.3); padding: 4px 8px; border-radius: 4px;">Time to High Risk: {t_high_str}</span>
+        </div>
+        <div style="font-size: 14px; margin-bottom: 8px;">{msg}</div>
+        <div style="font-size: 12px; opacity: 0.9; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 6px;">
+            <b>Recommended SOC Action:</b> {action}
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+def render_live_connection_table(df_connections: pd.DataFrame):
+    """
+    Renders scrollable live connection table with colored status rows:
+    Green -> Normal, Yellow -> Suspicious, Orange -> High Risk, Red -> Critical.
+    """
+    if df_connections is None or df_connections.empty:
+        st.info("No active flows captured yet. Start monitoring to populate the connection table.")
+        return
+
+    # Use HTML styling for rich visual table
+    table_rows = []
+    for _, row in df_connections.iterrows():
+        st_val = str(row.get("Status", "Normal")).strip()
+        if st_val == "Critical":
+            tag_class = "status-critical"
+        elif st_val == "High Risk":
+            tag_class = "status-highrisk"
+        elif st_val == "Suspicious":
+            tag_class = "status-suspicious"
+        else:
+            tag_class = "status-normal"
+            
+        src_ip = row.get("Source IP", "")
+        dst_ip = row.get("Destination IP", "")
+        proto = row.get("Protocol", "")
+        src_port = row.get("Source Port", 0)
+        dst_port = row.get("Destination Port", 0)
+        packets = f"{row.get('Packets', 0):,}"
+        bytes_val = f"{row.get('Bytes', 0):,}"
+        duration = row.get("Duration", "0s")
+
+        tr = (
+            f'<tr style="border-bottom: 1px solid #374151; font-size: 12px;">'
+            f'<td style="padding: 6px 10px; font-family: monospace;">{src_ip}</td>'
+            f'<td style="padding: 6px 10px; font-family: monospace;">{dst_ip}</td>'
+            f'<td style="padding: 6px 8px; font-weight: 600;">{proto}</td>'
+            f'<td style="padding: 6px 8px; font-family: monospace;">{src_port}</td>'
+            f'<td style="padding: 6px 8px; font-family: monospace;">{dst_port}</td>'
+            f'<td style="padding: 6px 8px;">{packets}</td>'
+            f'<td style="padding: 6px 8px;">{bytes_val}</td>'
+            f'<td style="padding: 6px 8px;">{duration}</td>'
+            f'<td style="padding: 6px 8px;"><span class="status-tag {tag_class}">{st_val}</span></td>'
+            f'</tr>'
+        )
+        table_rows.append(tr)
+
+    rows_html = "".join(table_rows)
+    table_html = (
+        '<div class="live-table-container">'
+        '<table style="width: 100%; border-collapse: collapse; text-align: left; color: #F9FAFB;">'
+        '<thead style="background-color: #1F2937; position: sticky; top: 0; z-index: 1;">'
+        '<tr style="border-bottom: 2px solid #4B5563; font-size: 12px; color: #9CA3AF;">'
+        '<th style="padding: 8px 10px;">Source IP</th>'
+        '<th style="padding: 8px 10px;">Destination IP</th>'
+        '<th style="padding: 8px 8px;">Protocol</th>'
+        '<th style="padding: 8px 8px;">Src Port</th>'
+        '<th style="padding: 8px 8px;">Dst Port</th>'
+        '<th style="padding: 8px 8px;">Packets</th>'
+        '<th style="padding: 8px 8px;">Bytes</th>'
+        '<th style="padding: 8px 8px;">Duration</th>'
+        '<th style="padding: 8px 8px;">Status</th>'
+        '</tr>'
+        '</thead>'
+        f'<tbody>{rows_html}</tbody>'
+        '</table>'
+        '</div>'
+    )
+    st.markdown(table_html, unsafe_allow_html=True)
+
 

@@ -67,5 +67,11 @@ pcap:
   max_packets: null
   explanation_window: "latest"
 
-
-
+live_monitoring:
+  interface: "Wi-Fi"
+  refresh_interval: 2
+  window_duration: 5
+  prediction_horizon: 5
+  max_buffer_packets: 50000
+  auto_export: false
+  rolling_history_seconds: 300

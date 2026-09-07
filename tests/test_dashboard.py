@@ -60,3 +60,59 @@ def test_pipeline_cached_loader():
     pipeline = load_pipeline_cached()
     assert hasattr(pipeline, "predict")
     assert hasattr(pipeline, "feature_extractor")
+
+def test_render_live_connection_table():
+    """Verifies live connection table produces valid HTML without 4-space markdown indentations."""
+    from unittest.mock import patch
+    import pandas as pd
+    from dashboard.components import render_live_connection_table
+
+    df_sample = pd.DataFrame([
+        {
+            "Source IP": "192.168.1.105",
+            "Destination IP": "10.0.0.1",
+            "Protocol": "TCP",
+            "Source Port": 54321,
+            "Destination Port": 443,
+            "Packets": 150,
+            "Bytes": 12500,
+            "Duration": "2.4s",
+            "Status": "Normal"
+        },
+        {
+            "Source IP": "192.168.1.200",
+            "Destination IP": "10.0.0.5",
+            "Protocol": "UDP",
+            "Source Port": 38570,
+            "Destination Port": 53,
+            "Packets": 5000,
+            "Bytes": 450000,
+            "Duration": "15.1s",
+            "Status": "Critical"
+        }
+    ])
+
+    with patch("streamlit.markdown") as mock_md:
+        render_live_connection_table(df_sample)
+        assert mock_md.called
+        call_args = mock_md.call_args
+        rendered_html = call_args[0][0]
+        kwargs = call_args[1]
+
+        # Verify unsafe_allow_html is True
+        assert kwargs.get("unsafe_allow_html") is True
+
+        # Verify essential HTML components
+        assert '<div class="live-table-container">' in rendered_html
+        assert '<table' in rendered_html
+        assert '<thead' in rendered_html
+        assert '<tbody>' in rendered_html
+        assert '192.168.1.105' in rendered_html
+        assert 'status-normal' in rendered_html
+        assert 'status-critical' in rendered_html
+        assert '12,500' in rendered_html
+
+        # Verify that no lines in rendered_html start with 4 or more spaces (which triggers CommonMark code blocks)
+        for line in rendered_html.split("\n"):
+            assert not line.startswith("    "), f"Indented line found which triggers markdown code block: {line}"
+
